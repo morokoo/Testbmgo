@@ -1,0 +1,27 @@
+name: Unzip file
+
+on: push
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository content
+      uses: actions/checkout@v2
+
+    - name: Install unzip
+      run: sudo apt-get install unzip
+
+    - name: Unzip FF Bandit.zip
+      run: unzip 'FF Bandit.zip' -d 'unzipped_files'
+
+    - name: Push unzipped content to repository
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        cp -r unzipped_files/* .
+        rm -rf unzipped_files
+        rm 'FF Bandit.zip'
+        git add .
+        git commit -m 'Unzipped FF Bandit.zip and added files'
+        git push origin main
