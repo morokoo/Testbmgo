@@ -17,8 +17,8 @@ jobs:
       
     - name: Push unzipped content to repository
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git config --morokoo.name 'github-actions[bot]'
+        git config --morokoo.email 'github-actions[bot]@users.noreply.github.com'
         cp -r unzipped_files/* .
         rm -rf unzipped_files
         rm 'FF Bandit.zip'
